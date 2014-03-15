@@ -74,11 +74,13 @@ class Model {
      * Project\Models\CarTyre would be project_models_car_tyre.
      */
     protected static function _class_name_to_table_name($class_name) {
+        $parts = explode('\\', $class_name);
+        $model = end($parts);
         return strtolower(preg_replace(
-                array('/\\\\/', '/(?<=[a-z])([A-Z])/', '/__/'),
-                array('_', '_$1', '_'),
-                ltrim($class_name, '\\')
-            ));
+            array('/\\\\/', '/(?<=[a-z])([A-Z])/', '/__/'),
+            array('_', '_$1', '_'),
+            ltrim($model, '\\')
+        ));
     }
 
     /**
